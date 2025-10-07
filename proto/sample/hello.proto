@@ -1,0 +1,11 @@
+edition = "2023";
+
+option go_package = "github.com/achtarudin/grpc-cutbray/protogen/sample";
+
+
+import "google/protobuf/go_features.proto";
+option features.(pb.go).api_level = API_OPAQUE;
+
+message Hello {
+  string name = 1;
+}

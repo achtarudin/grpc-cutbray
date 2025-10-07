@@ -24,6 +24,7 @@ const (
 type Hello struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Name        *string                `protobuf:"bytes,1,opt,name=name"`
+	xxx_hidden_Message     *string                `protobuf:"bytes,2,opt,name=message"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -65,9 +66,24 @@ func (x *Hello) GetName() string {
 	return ""
 }
 
+func (x *Hello) GetMessage() string {
+	if x != nil {
+		if x.xxx_hidden_Message != nil {
+			return *x.xxx_hidden_Message
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Hello) SetName(v string) {
 	x.xxx_hidden_Name = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *Hello) SetMessage(v string) {
+	x.xxx_hidden_Message = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *Hello) HasName() bool {
@@ -77,15 +93,28 @@ func (x *Hello) HasName() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
+func (x *Hello) HasMessage() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *Hello) ClearName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Name = nil
 }
 
+func (x *Hello) ClearMessage() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Message = nil
+}
+
 type Hello_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Name *string
+	Name    *string
+	Message *string
 }
 
 func (b0 Hello_builder) Build() *Hello {
@@ -93,8 +122,12 @@ func (b0 Hello_builder) Build() *Hello {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Name != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
 		x.xxx_hidden_Name = b.Name
+	}
+	if b.Message != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_Message = b.Message
 	}
 	return m0
 }
@@ -103,9 +136,10 @@ var File_proto_sample_hello_proto protoreflect.FileDescriptor
 
 const file_proto_sample_hello_proto_rawDesc = "" +
 	"\n" +
-	"\x18proto/sample/hello.proto\x1a!google/protobuf/go_features.proto\"\x1b\n" +
+	"\x18proto/sample/hello.proto\x1a!google/protobuf/go_features.proto\"5\n" +
 	"\x05Hello\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04nameB<Z2github.com/achtarudin/grpc-cutbray/protogen/sample\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessageB<Z2github.com/achtarudin/grpc-cutbray/protogen/sample\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_proto_sample_hello_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_proto_sample_hello_proto_goTypes = []any{

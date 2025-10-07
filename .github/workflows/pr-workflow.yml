@@ -28,10 +28,16 @@ jobs:
             /go/pkg/mod
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
           restore-keys: |
-            ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+            ${{ runner.os }}-go-
 
       - name: Install dependencies
         run: go mod download
+
+      - name: Install Go Protobuf Plugins
+        run: |
+          go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+      
       
       - name: Install Protoc
         uses: arduino/setup-protoc@v3

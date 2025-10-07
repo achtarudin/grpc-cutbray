@@ -33,5 +33,5 @@ jobs:
       - name: Install dependencies
         run: go mod download
 
-      - name: Build Protobuf files
-        run: make protos
+      - name: Check protoc version
+        run: protoc --version

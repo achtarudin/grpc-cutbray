@@ -38,18 +38,23 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-
 
+      - name: Install dependencies
+        run: go mod download
+
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          version: "32"
+
+      - name: Check protoc version
+        run: protoc --version
+        
       - name: Install Go Protobuf Plugins
         run: |
-          sudo apt-get install -y protobuf-compiler golang-goprotobuf-dev
           go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
       
-      - name: Check protoc version
-        run: protoc --version
-
-      - name: Install dependencies
-        run: go mod tidy
-
       - name: Build protoc
         run: | 
           make clean

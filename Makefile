@@ -20,9 +20,7 @@ protos:
     --go_out=. --go_opt=module=$(GO_MODULE) \
     --go-grpc_out=. --go-grpc_opt=module=$(GO_MODULE) \
     $(PROTO_FILES) \
-
-	go mod tidy
-
+	
 	@echo "Done."
 
 # Target untuk membersihkan file yang di-generate

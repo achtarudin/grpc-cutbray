@@ -51,19 +51,21 @@ jobs:
         run: protoc --version
         
       - name: Install Go Protobuf Plugins
+        shell: bash
         run: |
           go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
       
       - name: Build protoc
+        shell: bash
         run: | 
           make clean
           make protos
 
-      # - uses: stefanzweifel/git-auto-commit-action@v6
-      #   with:
-      #     file_pattern: 'protogen/*'
-      #     commit_message: "ci(proto): auto-generate protobuf files skipping CI [skip ci]"
+      - uses: stefanzweifel/git-auto-commit-action@v6
+        with:
+          file_pattern: 'protogen/*'
+          commit_message: "ci(proto): auto-generate protobuf files skipping CI [skip ci]"
 
       # - name: Bump version and push tag
       #   id: tag_version

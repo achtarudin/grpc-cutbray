@@ -26,9 +26,6 @@ jobs:
       - name: Check Go version
         run: go version
 
-      - name: Install dependencies
-        run: go mod download
-
       - name: Install Protoc
         uses: arduino/setup-protoc@v3
         with:
@@ -44,25 +41,36 @@ jobs:
           go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
       
+      - name: Install dependencies
+        run: go mod download
+
       - name: Build protoc
         shell: bash
         run: | 
           make clean
           make protos
 
+      - name: Check for changes
+        id: git-check
+        run: echo "changed=$(if git status --porcelain | grep -q 'protogen/'; then echo true; else echo false; fi)" >> $GITHUB_OUTPUT
+
       - uses: stefanzweifel/git-auto-commit-action@v6
+        name: Commit generated files
+        if: steps.git-check.outputs.changed == 'true'
         with:
           file_pattern: 'protogen/*'
           commit_message: "ci(proto): auto-generate protobuf files skipping CI [skip ci]"
 
-      - name: Bump version and push tag
+      - uses: anothrNick/github-tag-action@v1
+        name: Bump version and push tag
+        if: steps.git-check.outputs.changed == 'true'
         id: tag_version
-        uses: anothrNick/github-tag-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG_PREFIX: v
           DEFAULT_BUMP: patch
-
+          
       - name: Get the created tag
+        if: steps.git-check.outputs.changed == 'true'
         run: "echo Tag Version: ${{ steps.tag_version.outputs.new_tag }}"
 

@@ -169,7 +169,8 @@ var File_proto_sample_hello_proto protoreflect.FileDescriptor
 
 const file_proto_sample_hello_proto_rawDesc = "" +
 	"\n" +
-	"\x18proto/sample/hello.proto\x1a!google/protobuf/go_features.proto\"K\n" +
+	"\x18proto/sample/hello.proto\x12\n" +
+	"achtarudin\x1a!google/protobuf/go_features.proto\"K\n" +
 	"\x05Hello\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x14\n" +
@@ -177,7 +178,7 @@ const file_proto_sample_hello_proto_rawDesc = "" +
 
 var file_proto_sample_hello_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_proto_sample_hello_proto_goTypes = []any{
-	(*Hello)(nil), // 0: Hello
+	(*Hello)(nil), // 0: achtarudin.Hello
 }
 var file_proto_sample_hello_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

@@ -40,3 +40,6 @@ jobs:
 
       - name: Check protoc version
         run: protoc --version
+
+      - name: Build protoc
+        run: make protos

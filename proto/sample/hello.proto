@@ -9,4 +9,5 @@ option features.(pb.go).api_level = API_OPAQUE;
 message Hello {
   string name = 1;
   string message = 2;
+  string title = 3;
 }

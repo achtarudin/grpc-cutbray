@@ -63,5 +63,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get the created tag
-        run: ${{ steps.tag_version.outputs.new_tag }}
+        run: "echo Tag Version: ${{ steps.tag_version.outputs.new_tag }}"
 

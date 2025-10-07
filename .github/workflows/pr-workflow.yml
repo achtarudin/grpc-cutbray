@@ -69,6 +69,8 @@ jobs:
         uses: anothrNick/github-tag-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG_PREFIX: v
+          DEFAULT_BUMP: patch
 
       - name: Get the created tag
         run: "echo Tag Version: ${{ steps.tag_version.outputs.new_tag }}"

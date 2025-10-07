@@ -55,19 +55,19 @@ jobs:
           make clean
           make protos
 
-      - uses: stefanzweifel/git-auto-commit-action@v6
-        with:
-          file_pattern: 'protogen/*'
-          commit_message: "ci(proto): auto-generate protobuf files skipping CI [skip ci]"
+      # - uses: stefanzweifel/git-auto-commit-action@v6
+      #   with:
+      #     file_pattern: 'protogen/*'
+      #     commit_message: "ci(proto): auto-generate protobuf files skipping CI [skip ci]"
 
-      - name: Bump version and push tag
-        id: tag_version
-        uses: anothrNick/github-tag-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG_PREFIX: v
-          DEFAULT_BUMP: patch
+      # - name: Bump version and push tag
+      #   id: tag_version
+      #   uses: anothrNick/github-tag-action@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     TAG_PREFIX: v
+      #     DEFAULT_BUMP: patch
 
-      - name: Get the created tag
-        run: "echo Tag Version: ${{ steps.tag_version.outputs.new_tag }}"
+      # - name: Get the created tag
+      #   run: "echo Tag Version: ${{ steps.tag_version.outputs.new_tag }}"
 

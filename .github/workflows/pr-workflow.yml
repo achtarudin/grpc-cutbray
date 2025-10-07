@@ -21,22 +21,10 @@ jobs:
       - uses: actions/setup-go@v6
         with:
           go-version: '^1.24.0'
-          check-latest: false
           cache: true
       
       - name: Check Go version
         run: go version
-
-      - name: Cache go modules
-        uses: actions/cache@v4
-        id: cache
-        with:
-          path: |
-            $HOME/.cache/go-build
-            /go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
 
       - name: Install dependencies
         run: go mod download
@@ -65,7 +53,6 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v6
         with:
           file_pattern: 'protogen/*'
-          tagging_message: ${{ steps.tag_version.outputs.new_tag }}
           commit_message: "ci(proto): auto-generate protobuf files skipping CI [skip ci]"
 
       - name: Bump version and push tag
@@ -76,6 +63,6 @@ jobs:
           TAG_PREFIX: v
           DEFAULT_BUMP: patch
 
-      # - name: Get the created tag
-      #   run: "echo Tag Version: ${{ steps.tag_version.outputs.new_tag }}"
+      - name: Get the created tag
+        run: "echo Tag Version: ${{ steps.tag_version.outputs.new_tag }}"
 

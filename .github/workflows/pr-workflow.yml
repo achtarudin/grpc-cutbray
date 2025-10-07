@@ -8,6 +8,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
     steps:
       - uses: actions/checkout@v5
         name: Check out code
@@ -51,3 +55,13 @@ jobs:
         run: | 
           make clean
           make protos
+
+      - name: Bump version and push tag
+        id: tag_version
+        uses: anothrNick/github-tag-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get the created tag
+        run: ${{ steps.tag_version.outputs.new_tag }}
+

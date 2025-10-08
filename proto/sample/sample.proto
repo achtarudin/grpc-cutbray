@@ -1,13 +1,13 @@
 edition = "2023";
 
-package achtarudin;
+package sample;
 
-option go_package = "github.com/achtarudin/grpc-cutbray/protogen/sample";
+option go_package = "github.com/achtarudin/grpc-cutbray/protogen/go/sample";
 
 import "google/protobuf/go_features.proto";
 option features.(pb.go).api_level = API_OPAQUE;
 
-message Hello {
+message Sample {
   string name = 1;
   string message = 2;
   string title = 3;

@@ -4,13 +4,15 @@
 // 	protoc        v6.32.1
 // source: proto/hello/hello.proto
 
+// edition = "2023";
+
 package hello
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
+	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -22,13 +24,11 @@ const (
 )
 
 type HelloRequest struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Name        *string                `protobuf:"bytes,1,opt,name=name"`
-	xxx_hidden_Age         uint32                 `protobuf:"varint,16,opt,name=age"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Age           uint32                 `protobuf:"varint,16,opt,name=age,proto3" json:"age,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *HelloRequest) Reset() {
@@ -56,86 +56,30 @@ func (x *HelloRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
+// Deprecated: Use HelloRequest.ProtoReflect.Descriptor instead.
+func (*HelloRequest) Descriptor() ([]byte, []int) {
+	return file_proto_hello_hello_proto_rawDescGZIP(), []int{0}
+}
+
 func (x *HelloRequest) GetName() string {
 	if x != nil {
-		if x.xxx_hidden_Name != nil {
-			return *x.xxx_hidden_Name
-		}
-		return ""
+		return x.Name
 	}
 	return ""
 }
 
 func (x *HelloRequest) GetAge() uint32 {
 	if x != nil {
-		return x.xxx_hidden_Age
+		return x.Age
 	}
 	return 0
 }
 
-func (x *HelloRequest) SetName(v string) {
-	x.xxx_hidden_Name = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
-}
-
-func (x *HelloRequest) SetAge(v uint32) {
-	x.xxx_hidden_Age = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
-}
-
-func (x *HelloRequest) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
-}
-
-func (x *HelloRequest) HasAge() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
-}
-
-func (x *HelloRequest) ClearName() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Name = nil
-}
-
-func (x *HelloRequest) ClearAge() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Age = 0
-}
-
-type HelloRequest_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	Name *string
-	Age  *uint32
-}
-
-func (b0 HelloRequest_builder) Build() *HelloRequest {
-	m0 := &HelloRequest{}
-	b, x := &b0, m0
-	_, _ = b, x
-	if b.Name != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
-		x.xxx_hidden_Name = b.Name
-	}
-	if b.Age != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
-		x.xxx_hidden_Age = *b.Age
-	}
-	return m0
-}
-
 type HelloResponse struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Greet       *string                `protobuf:"bytes,1,opt,name=greet"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Greet         string                 `protobuf:"bytes,1,opt,name=greet,proto3" json:"greet,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *HelloResponse) Reset() {
@@ -163,55 +107,23 @@ func (x *HelloResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
+// Deprecated: Use HelloResponse.ProtoReflect.Descriptor instead.
+func (*HelloResponse) Descriptor() ([]byte, []int) {
+	return file_proto_hello_hello_proto_rawDescGZIP(), []int{1}
+}
+
 func (x *HelloResponse) GetGreet() string {
 	if x != nil {
-		if x.xxx_hidden_Greet != nil {
-			return *x.xxx_hidden_Greet
-		}
-		return ""
+		return x.Greet
 	}
 	return ""
-}
-
-func (x *HelloResponse) SetGreet(v string) {
-	x.xxx_hidden_Greet = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
-}
-
-func (x *HelloResponse) HasGreet() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
-}
-
-func (x *HelloResponse) ClearGreet() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Greet = nil
-}
-
-type HelloResponse_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	Greet *string
-}
-
-func (b0 HelloResponse_builder) Build() *HelloResponse {
-	m0 := &HelloResponse{}
-	b, x := &b0, m0
-	_, _ = b, x
-	if b.Greet != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
-		x.xxx_hidden_Greet = b.Greet
-	}
-	return m0
 }
 
 var File_proto_hello_hello_proto protoreflect.FileDescriptor
 
 const file_proto_hello_hello_proto_rawDesc = "" +
 	"\n" +
-	"\x17proto/hello/hello.proto\x12\x05hello\x1a!google/protobuf/go_features.proto\"4\n" +
+	"\x17proto/hello/hello.proto\x12\x05hello\"4\n" +
 	"\fHelloRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x10\n" +
 	"\x03age\x18\x10 \x01(\rR\x03age\"%\n" +
@@ -219,7 +131,19 @@ const file_proto_hello_hello_proto_rawDesc = "" +
 	"\x05greet\x18\x01 \x01(\tR\x05greet2\x87\x01\n" +
 	"\fHelloService\x127\n" +
 	"\bSayHello\x12\x13.hello.HelloRequest\x1a\x14.hello.HelloResponse\"\x00\x12>\n" +
-	"\rSayManyHellos\x12\x13.hello.HelloRequest\x1a\x14.hello.HelloResponse\"\x000\x01B>Z4github.com/achtarudin/grpc-cutbray/protogen/go/hello\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\rSayManyHellos\x12\x13.hello.HelloRequest\x1a\x14.hello.HelloResponse\"\x000\x01B6Z4github.com/achtarudin/grpc-cutbray/protogen/go/hellob\x06proto3"
+
+var (
+	file_proto_hello_hello_proto_rawDescOnce sync.Once
+	file_proto_hello_hello_proto_rawDescData []byte
+)
+
+func file_proto_hello_hello_proto_rawDescGZIP() []byte {
+	file_proto_hello_hello_proto_rawDescOnce.Do(func() {
+		file_proto_hello_hello_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_hello_hello_proto_rawDesc), len(file_proto_hello_hello_proto_rawDesc)))
+	})
+	return file_proto_hello_hello_proto_rawDescData
+}
 
 var file_proto_hello_hello_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_proto_hello_hello_proto_goTypes = []any{

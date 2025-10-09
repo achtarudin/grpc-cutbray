@@ -1,11 +1,13 @@
-edition = "2023";
+syntax = "proto3";
+
+// edition = "2023";
 
 package hello;
 
 option go_package = "github.com/achtarudin/grpc-cutbray/protogen/go/hello";
 
-import "google/protobuf/go_features.proto";
-option features.(pb.go).api_level = API_OPAQUE;
+// import "google/protobuf/go_features.proto";
+// option features.(pb.go).api_level = API_OPAQUE;
 
 message HelloRequest { 
   string name = 1;

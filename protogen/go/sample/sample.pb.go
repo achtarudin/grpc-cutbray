@@ -4,13 +4,15 @@
 // 	protoc        v6.32.1
 // source: proto/sample/sample.proto
 
+// edition = "2023";
+
 package sample
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
+	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -22,14 +24,12 @@ const (
 )
 
 type Sample struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Name        *string                `protobuf:"bytes,1,opt,name=name"`
-	xxx_hidden_Message     *string                `protobuf:"bytes,2,opt,name=message"`
-	xxx_hidden_Title       *string                `protobuf:"bytes,3,opt,name=title"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Title         string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Sample) Reset() {
@@ -57,123 +57,53 @@ func (x *Sample) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
+// Deprecated: Use Sample.ProtoReflect.Descriptor instead.
+func (*Sample) Descriptor() ([]byte, []int) {
+	return file_proto_sample_sample_proto_rawDescGZIP(), []int{0}
+}
+
 func (x *Sample) GetName() string {
 	if x != nil {
-		if x.xxx_hidden_Name != nil {
-			return *x.xxx_hidden_Name
-		}
-		return ""
+		return x.Name
 	}
 	return ""
 }
 
 func (x *Sample) GetMessage() string {
 	if x != nil {
-		if x.xxx_hidden_Message != nil {
-			return *x.xxx_hidden_Message
-		}
-		return ""
+		return x.Message
 	}
 	return ""
 }
 
 func (x *Sample) GetTitle() string {
 	if x != nil {
-		if x.xxx_hidden_Title != nil {
-			return *x.xxx_hidden_Title
-		}
-		return ""
+		return x.Title
 	}
 	return ""
-}
-
-func (x *Sample) SetName(v string) {
-	x.xxx_hidden_Name = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
-}
-
-func (x *Sample) SetMessage(v string) {
-	x.xxx_hidden_Message = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
-}
-
-func (x *Sample) SetTitle(v string) {
-	x.xxx_hidden_Title = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
-}
-
-func (x *Sample) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
-}
-
-func (x *Sample) HasMessage() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
-}
-
-func (x *Sample) HasTitle() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
-}
-
-func (x *Sample) ClearName() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Name = nil
-}
-
-func (x *Sample) ClearMessage() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Message = nil
-}
-
-func (x *Sample) ClearTitle() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
-	x.xxx_hidden_Title = nil
-}
-
-type Sample_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	Name    *string
-	Message *string
-	Title   *string
-}
-
-func (b0 Sample_builder) Build() *Sample {
-	m0 := &Sample{}
-	b, x := &b0, m0
-	_, _ = b, x
-	if b.Name != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
-		x.xxx_hidden_Name = b.Name
-	}
-	if b.Message != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
-		x.xxx_hidden_Message = b.Message
-	}
-	if b.Title != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
-		x.xxx_hidden_Title = b.Title
-	}
-	return m0
 }
 
 var File_proto_sample_sample_proto protoreflect.FileDescriptor
 
 const file_proto_sample_sample_proto_rawDesc = "" +
 	"\n" +
-	"\x19proto/sample/sample.proto\x12\x06sample\x1a!google/protobuf/go_features.proto\"L\n" +
+	"\x19proto/sample/sample.proto\x12\x06sample\"L\n" +
 	"\x06Sample\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x14\n" +
-	"\x05title\x18\x03 \x01(\tR\x05titleB?Z5github.com/achtarudin/grpc-cutbray/protogen/go/sample\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x05title\x18\x03 \x01(\tR\x05titleB7Z5github.com/achtarudin/grpc-cutbray/protogen/go/sampleb\x06proto3"
+
+var (
+	file_proto_sample_sample_proto_rawDescOnce sync.Once
+	file_proto_sample_sample_proto_rawDescData []byte
+)
+
+func file_proto_sample_sample_proto_rawDescGZIP() []byte {
+	file_proto_sample_sample_proto_rawDescOnce.Do(func() {
+		file_proto_sample_sample_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_sample_sample_proto_rawDesc), len(file_proto_sample_sample_proto_rawDesc)))
+	})
+	return file_proto_sample_sample_proto_rawDescData
+}
 
 var file_proto_sample_sample_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_proto_sample_sample_proto_goTypes = []any{

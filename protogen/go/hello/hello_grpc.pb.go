@@ -4,6 +4,8 @@
 // - protoc             v6.32.1
 // source: proto/hello/hello.proto
 
+// edition = "2023";
+
 package hello
 
 import (

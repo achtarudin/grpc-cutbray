@@ -17,7 +17,7 @@ syntax = "proto3";
 package google.type;
 
 option cc_enable_arenas = true;
-option go_package = "google.golang.org/genproto/googleapis/type/date;date";
+option go_package = "github.com/achtarudin/grpc-cutbray/protogen/go/google";
 option java_multiple_files = true;
 option java_outer_classname = "DateProto";
 option java_package = "com.google.type";

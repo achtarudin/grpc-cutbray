@@ -3,10 +3,14 @@ syntax = "proto3";
 package bank;
 
 import "proto/bank/type/account.proto";
-
+import "proto/bank/type/exchange.proto";
+  
 option go_package = "github.com/achtarudin/grpc-cutbray/protogen/go/bank";
 
 service BankService {
   rpc GetCurrentBalance (CurrentBalanceRequest) 
   returns (CurrentBalanceResponse);
+
+  rpc FetchExchangeRates(ExchangeRateRequest) 
+  returns (stream ExchangeRateResponse);
 } 

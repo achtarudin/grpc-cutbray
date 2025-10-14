@@ -24,8 +24,8 @@ var File_proto_bank_type_service_proto protoreflect.FileDescriptor
 
 const file_proto_bank_type_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1dproto/bank/type/service.proto\x12\x04bank\x1a\x1dproto/bank/type/account.proto2`\n" +
-	"\x0eAccountService\x12N\n" +
+	"\x1dproto/bank/type/service.proto\x12\x04bank\x1a\x1dproto/bank/type/account.proto2]\n" +
+	"\vBankService\x12N\n" +
 	"\x11GetCurrentBalance\x12\x1b.bank.CurrentBalanceRequest\x1a\x1c.bank.CurrentBalanceResponseB5Z3github.com/achtarudin/grpc-cutbray/protogen/go/bankb\x06proto3"
 
 var file_proto_bank_type_service_proto_goTypes = []any{
@@ -33,8 +33,8 @@ var file_proto_bank_type_service_proto_goTypes = []any{
 	(*CurrentBalanceResponse)(nil), // 1: bank.CurrentBalanceResponse
 }
 var file_proto_bank_type_service_proto_depIdxs = []int32{
-	0, // 0: bank.AccountService.GetCurrentBalance:input_type -> bank.CurrentBalanceRequest
-	1, // 1: bank.AccountService.GetCurrentBalance:output_type -> bank.CurrentBalanceResponse
+	0, // 0: bank.BankService.GetCurrentBalance:input_type -> bank.CurrentBalanceRequest
+	1, // 1: bank.BankService.GetCurrentBalance:output_type -> bank.CurrentBalanceResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

@@ -68,8 +68,8 @@ func (x *CurrentBalanceRequest) GetAccountNumber() string {
 
 type CurrentBalanceResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AccountNumber string                 `protobuf:"bytes,1,opt,name=account_number,proto3" json:"account_number,omitempty"`
-	CurrentDate   *google.Date           `protobuf:"bytes,3,opt,name=current_date,proto3" json:"current_date,omitempty"`
+	Amount        string                 `protobuf:"bytes,1,opt,name=amount,proto3" json:"amount,omitempty"`
+	CurrentDate   *google.Date           `protobuf:"bytes,2,opt,name=current_date,proto3" json:"current_date,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -104,9 +104,9 @@ func (*CurrentBalanceResponse) Descriptor() ([]byte, []int) {
 	return file_proto_bank_type_account_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CurrentBalanceResponse) GetAccountNumber() string {
+func (x *CurrentBalanceResponse) GetAmount() string {
 	if x != nil {
-		return x.AccountNumber
+		return x.Amount
 	}
 	return ""
 }
@@ -124,10 +124,10 @@ const file_proto_bank_type_account_proto_rawDesc = "" +
 	"\n" +
 	"\x1dproto/bank/type/account.proto\x12\x04bank\x1a\x1cproto/google/type/date.proto\"?\n" +
 	"\x15CurrentBalanceRequest\x12&\n" +
-	"\x0eaccount_number\x18\x01 \x01(\tR\x0eaccount_number\"w\n" +
-	"\x16CurrentBalanceResponse\x12&\n" +
-	"\x0eaccount_number\x18\x01 \x01(\tR\x0eaccount_number\x125\n" +
-	"\fcurrent_date\x18\x03 \x01(\v2\x11.google.type.DateR\fcurrent_dateB5Z3github.com/achtarudin/grpc-cutbray/protogen/go/bankb\x06proto3"
+	"\x0eaccount_number\x18\x01 \x01(\tR\x0eaccount_number\"g\n" +
+	"\x16CurrentBalanceResponse\x12\x16\n" +
+	"\x06amount\x18\x01 \x01(\tR\x06amount\x125\n" +
+	"\fcurrent_date\x18\x02 \x01(\v2\x11.google.type.DateR\fcurrent_dateB5Z3github.com/achtarudin/grpc-cutbray/protogen/go/bankb\x06proto3"
 
 var (
 	file_proto_bank_type_account_proto_rawDescOnce sync.Once

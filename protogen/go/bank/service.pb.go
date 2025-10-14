@@ -24,19 +24,24 @@ var File_proto_bank_type_service_proto protoreflect.FileDescriptor
 
 const file_proto_bank_type_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1dproto/bank/type/service.proto\x12\x04bank\x1a\x1dproto/bank/type/account.proto2]\n" +
+	"\x1dproto/bank/type/service.proto\x12\x04bank\x1a\x1dproto/bank/type/account.proto\x1a\x1eproto/bank/type/exchange.proto2\xac\x01\n" +
 	"\vBankService\x12N\n" +
-	"\x11GetCurrentBalance\x12\x1b.bank.CurrentBalanceRequest\x1a\x1c.bank.CurrentBalanceResponseB5Z3github.com/achtarudin/grpc-cutbray/protogen/go/bankb\x06proto3"
+	"\x11GetCurrentBalance\x12\x1b.bank.CurrentBalanceRequest\x1a\x1c.bank.CurrentBalanceResponse\x12M\n" +
+	"\x12FetchExchangeRates\x12\x19.bank.ExchangeRateRequest\x1a\x1a.bank.ExchangeRateResponse0\x01B5Z3github.com/achtarudin/grpc-cutbray/protogen/go/bankb\x06proto3"
 
 var file_proto_bank_type_service_proto_goTypes = []any{
 	(*CurrentBalanceRequest)(nil),  // 0: bank.CurrentBalanceRequest
-	(*CurrentBalanceResponse)(nil), // 1: bank.CurrentBalanceResponse
+	(*ExchangeRateRequest)(nil),    // 1: bank.ExchangeRateRequest
+	(*CurrentBalanceResponse)(nil), // 2: bank.CurrentBalanceResponse
+	(*ExchangeRateResponse)(nil),   // 3: bank.ExchangeRateResponse
 }
 var file_proto_bank_type_service_proto_depIdxs = []int32{
 	0, // 0: bank.BankService.GetCurrentBalance:input_type -> bank.CurrentBalanceRequest
-	1, // 1: bank.BankService.GetCurrentBalance:output_type -> bank.CurrentBalanceResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	1, // 1: bank.BankService.FetchExchangeRates:input_type -> bank.ExchangeRateRequest
+	2, // 2: bank.BankService.GetCurrentBalance:output_type -> bank.CurrentBalanceResponse
+	3, // 3: bank.BankService.FetchExchangeRates:output_type -> bank.ExchangeRateResponse
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -48,6 +53,7 @@ func file_proto_bank_type_service_proto_init() {
 		return
 	}
 	file_proto_bank_type_account_proto_init()
+	file_proto_bank_type_exchange_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -7,10 +7,10 @@ import "proto/google/type/date.proto";
 option go_package = "github.com/achtarudin/grpc-cutbray/protogen/go/bank";
 
 message CurrentBalanceRequest {
-    string account_number = 1 [json_name = "account_number"];
+  string account_number = 1 [json_name = "account_number"];
 }
 
 message CurrentBalanceResponse {
-    string amount = 1 [json_name = "amount"];
-    google.type.Date current_date = 2 [json_name = "current_date"];
+  string amount = 1 [json_name = "amount"];
+  google.type.Date current_date = 2 [json_name = "current_date"];
 }

@@ -11,6 +11,6 @@ message CurrentBalanceRequest {
 }
 
 message CurrentBalanceResponse {
-  string amount = 1 [json_name = "amount"];
+  double amount = 1 [json_name = "amount"];
   google.type.Date current_date = 2 [json_name = "current_date"];
 }

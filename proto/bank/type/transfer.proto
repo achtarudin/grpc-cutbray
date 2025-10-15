@@ -16,14 +16,14 @@ message TransferRequest {
   string from_account_number = 1 [json_name = "from_account_number"];
   string to_account_number = 2 [json_name = "to_account_number"];
   string currency = 3 [json_name = "currency"];
-  string amount = 4 [json_name = "amount"];
+  double amount = 4 [json_name = "amount"];
 }
 
 message TransferResponse {
   string from_account_number = 1 [json_name = "from_account_number"];
   string to_account_number = 2 [json_name = "to_account_number"];
   string currency = 3 [json_name = "currency"];
-  string amount = 4 [json_name = "amount"];
+  double amount = 4 [json_name = "amount"];
   TransferStatus status = 5 [json_name = "status"];
   google.type.DateTime timestamp = 6 [json_name = "timestamp"];
 }

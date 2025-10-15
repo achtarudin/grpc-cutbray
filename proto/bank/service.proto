@@ -4,7 +4,8 @@ package bank;
 
 import "proto/bank/type/account.proto";
 import "proto/bank/type/exchange.proto";
-  
+import "proto/bank/type/transaction.proto";
+
 option go_package = "github.com/achtarudin/grpc-cutbray/protogen/go/bank";
 
 service BankService {
@@ -13,4 +14,7 @@ service BankService {
 
   rpc FetchExchangeRates(ExchangeRateRequest) 
   returns (stream ExchangeRateResponse);
+
+  rpc SummarizeTransactions(stream Transaction) 
+  returns (TransactionSummary);
 } 

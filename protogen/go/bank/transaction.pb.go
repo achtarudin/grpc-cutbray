@@ -72,13 +72,14 @@ func (TransactionType) EnumDescriptor() ([]byte, []int) {
 }
 
 type Transaction struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	AccountId       string                 `protobuf:"bytes,1,opt,name=account_id,proto3" json:"account_id,omitempty"`
-	Type            TransactionType        `protobuf:"varint,2,opt,name=type,proto3,enum=bank.TransactionType" json:"type,omitempty"`
-	Amount          float64                `protobuf:"fixed64,3,opt,name=amount,proto3" json:"amount,omitempty"`
-	TransactionDate *google.DateTime       `protobuf:"bytes,4,opt,name=transaction_date,proto3" json:"transaction_date,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AccountNumber string                 `protobuf:"bytes,1,opt,name=account_number,proto3" json:"account_number,omitempty"`
+	Type          TransactionType        `protobuf:"varint,2,opt,name=type,proto3,enum=bank.TransactionType" json:"type,omitempty"`
+	Amount        float64                `protobuf:"fixed64,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	Timestamp     *google.DateTime       `protobuf:"bytes,4,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Note          string                 `protobuf:"bytes,16,opt,name=note,proto3" json:"note,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Transaction) Reset() {
@@ -111,9 +112,9 @@ func (*Transaction) Descriptor() ([]byte, []int) {
 	return file_proto_bank_type_transaction_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Transaction) GetAccountId() string {
+func (x *Transaction) GetAccountNumber() string {
 	if x != nil {
-		return x.AccountId
+		return x.AccountNumber
 	}
 	return ""
 }
@@ -132,16 +133,23 @@ func (x *Transaction) GetAmount() float64 {
 	return 0
 }
 
-func (x *Transaction) GetTransactionDate() *google.DateTime {
+func (x *Transaction) GetTimestamp() *google.DateTime {
 	if x != nil {
-		return x.TransactionDate
+		return x.Timestamp
 	}
 	return nil
 }
 
+func (x *Transaction) GetNote() string {
+	if x != nil {
+		return x.Note
+	}
+	return ""
+}
+
 type TransactionSummary struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	AccountId       string                 `protobuf:"bytes,1,opt,name=account_id,proto3" json:"account_id,omitempty"`
+	AccountNumber   string                 `protobuf:"bytes,1,opt,name=account_number,proto3" json:"account_number,omitempty"`
 	SumAmountIn     float64                `protobuf:"fixed64,2,opt,name=sum_amount_in,proto3" json:"sum_amount_in,omitempty"`
 	SumAmountOut    float64                `protobuf:"fixed64,3,opt,name=sum_amount_out,proto3" json:"sum_amount_out,omitempty"`
 	SumTotal        float64                `protobuf:"fixed64,4,opt,name=sum_total,proto3" json:"sum_total,omitempty"`
@@ -180,9 +188,9 @@ func (*TransactionSummary) Descriptor() ([]byte, []int) {
 	return file_proto_bank_type_transaction_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *TransactionSummary) GetAccountId() string {
+func (x *TransactionSummary) GetAccountNumber() string {
 	if x != nil {
-		return x.AccountId
+		return x.AccountNumber
 	}
 	return ""
 }
@@ -219,18 +227,15 @@ var File_proto_bank_type_transaction_proto protoreflect.FileDescriptor
 
 const file_proto_bank_type_transaction_proto_rawDesc = "" +
 	"\n" +
-	"!proto/bank/type/transaction.proto\x12\x04bank\x1a\x1cproto/google/type/date.proto\x1a proto/google/type/datetime.proto\"\xb3\x01\n" +
-	"\vTransaction\x12\x1e\n" +
-	"\n" +
-	"account_id\x18\x01 \x01(\tR\n" +
-	"account_id\x12)\n" +
+	"!proto/bank/type/transaction.proto\x12\x04bank\x1a\x1cproto/google/type/date.proto\x1a proto/google/type/datetime.proto\"\xc1\x01\n" +
+	"\vTransaction\x12&\n" +
+	"\x0eaccount_number\x18\x01 \x01(\tR\x0eaccount_number\x12)\n" +
 	"\x04type\x18\x02 \x01(\x0e2\x15.bank.TransactionTypeR\x04type\x12\x16\n" +
-	"\x06amount\x18\x03 \x01(\x01R\x06amount\x12A\n" +
-	"\x10transaction_date\x18\x04 \x01(\v2\x15.google.type.DateTimeR\x10transaction_date\"\xdf\x01\n" +
-	"\x12TransactionSummary\x12\x1e\n" +
-	"\n" +
-	"account_id\x18\x01 \x01(\tR\n" +
-	"account_id\x12$\n" +
+	"\x06amount\x18\x03 \x01(\x01R\x06amount\x123\n" +
+	"\ttimestamp\x18\x04 \x01(\v2\x15.google.type.DateTimeR\ttimestamp\x12\x12\n" +
+	"\x04note\x18\x10 \x01(\tR\x04note\"\xe7\x01\n" +
+	"\x12TransactionSummary\x12&\n" +
+	"\x0eaccount_number\x18\x01 \x01(\tR\x0eaccount_number\x12$\n" +
 	"\rsum_amount_in\x18\x02 \x01(\x01R\rsum_amount_in\x12&\n" +
 	"\x0esum_amount_out\x18\x03 \x01(\x01R\x0esum_amount_out\x12\x1c\n" +
 	"\tsum_total\x18\x04 \x01(\x01R\tsum_total\x12=\n" +
@@ -263,7 +268,7 @@ var file_proto_bank_type_transaction_proto_goTypes = []any{
 }
 var file_proto_bank_type_transaction_proto_depIdxs = []int32{
 	0, // 0: bank.Transaction.type:type_name -> bank.TransactionType
-	3, // 1: bank.Transaction.transaction_date:type_name -> google.type.DateTime
+	3, // 1: bank.Transaction.timestamp:type_name -> google.type.DateTime
 	4, // 2: bank.TransactionSummary.transaction_date:type_name -> google.type.Date
 	3, // [3:3] is the sub-list for method output_type
 	3, // [3:3] is the sub-list for method input_type

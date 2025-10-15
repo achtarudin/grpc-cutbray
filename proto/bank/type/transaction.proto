@@ -14,13 +14,15 @@ enum TransactionType {
 }
 
 message Transaction {
-  string account_id = 1 [json_name = "account_id"];
+  string account_number = 1 [json_name = "account_number"];
   TransactionType type = 2 [json_name = "type"];
   double amount = 3 [json_name = "amount"];
-  google.type.DateTime transaction_date = 4 [json_name = "transaction_date"];
+  google.type.DateTime timestamp = 4 [json_name = "timestamp"];
+  string note = 16 [json_name = "note"];
 }
+
 message TransactionSummary {
-  string account_id = 1 [json_name = "account_id"];
+  string account_number = 1 [json_name = "account_number"];
   double sum_amount_in = 2 [json_name = "sum_amount_in"];
   double sum_amount_out = 3 [json_name = "sum_amount_out"];
   double sum_total = 4 [json_name = "sum_total"];

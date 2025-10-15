@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package bank;
+
+import "proto/google/type/datetime.proto";
+
+option go_package = "github.com/achtarudin/grpc-cutbray/protogen/go/bank";
+
+enum TransferStatus {
+  TRANSFER_STATUS_UNSPECIFIED = 0;
+  TRANSFER_STATUS_SUCCESS = 1;
+  TRANSFER_STATUS_FAILED = 2;
+}
+
+message TransferRequest {
+  string from_account_number = 1 [json_name = "from_account_number"];
+  string to_account_number = 2 [json_name = "to_account_number"];
+  string currency = 3 [json_name = "currency"];
+  string amount = 4 [json_name = "amount"];
+}
+
+message TransferResponse {
+  string from_account_number = 1 [json_name = "from_account_number"];
+  string to_account_number = 2 [json_name = "to_account_number"];
+  string currency = 3 [json_name = "currency"];
+  string amount = 4 [json_name = "amount"];
+  TransferStatus status = 5 [json_name = "status"];
+  google.type.DateTime timestamp = 6 [json_name = "timestamp"];
+}

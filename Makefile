@@ -44,10 +44,19 @@ protoc-go-gateway:
 	--grpc-gateway_out ./protogen/gateway/go \
 	--grpc-gateway_opt logtostderr=true \
 	--grpc-gateway_opt paths=source_relative \
-	--grpc-gateway_opt grpc_api_configuration=./grpc-gateway/config.yml \
 	--grpc-gateway_opt standalone=true \
 	--grpc-gateway_opt generate_unbound_methods=true \
-	$(PROTO_FILES) 
+	$(PROTO_FILES)
+
+.PHONY: protoc-openapiv2-gateway
+protoc-openapiv2-gateway:
+	$(PROTOC) -I . \
+	--openapiv2_out ./protogen/gateway/openapiv2 \
+	--openapiv2_opt output_format=yaml \
+	--openapiv2_opt generate_unbound_methods=true \
+	--openapiv2_opt allow_merge=true \
+	--openapiv2_opt merge_file_name=merged \
+	$(PROTO_FILES)
 
 .PHONY: build-gateway
-build-gateway: clean-gateway protoc-go-gateway
+build-gateway: clean-gateway protoc-go-gateway protoc-openapiv2-gateway

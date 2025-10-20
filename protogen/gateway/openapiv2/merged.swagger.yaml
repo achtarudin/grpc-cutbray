@@ -1,10 +1,11 @@
 swagger: "2.0"
 info:
-  title: proto/hello/hello.proto
+  title: proto/google/type/datetime.proto
   version: version not set
 tags:
   - name: HelloService
   - name: BankService
+  - name: ResiliencyService
 consumes:
   - application/json
 produces:
@@ -198,6 +199,100 @@ paths:
             $ref: '#/definitions/helloHelloRequest'
       tags:
         - HelloService
+  /resiliency.ResiliencyService/BidirectionalResiliency:
+    post:
+      operationId: ResiliencyService_BidirectionalResiliency
+      responses:
+        "200":
+          description: A successful response.(streaming responses)
+          schema:
+            type: object
+            properties:
+              result:
+                $ref: '#/definitions/resiliencyResiliencyResponse'
+              error:
+                $ref: '#/definitions/rpcStatus'
+            title: Stream result of resiliencyResiliencyResponse
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          description: ' (streaming inputs)'
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyRequest'
+      tags:
+        - ResiliencyService
+  /resiliency.ResiliencyService/ClientResiliency:
+    post:
+      operationId: ResiliencyService_ClientResiliency
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          description: ' (streaming inputs)'
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyRequest'
+      tags:
+        - ResiliencyService
+  /resiliency.ResiliencyService/ServerResiliency:
+    post:
+      operationId: ResiliencyService_ServerResiliency
+      responses:
+        "200":
+          description: A successful response.(streaming responses)
+          schema:
+            type: object
+            properties:
+              result:
+                $ref: '#/definitions/resiliencyResiliencyResponse'
+              error:
+                $ref: '#/definitions/rpcStatus'
+            title: Stream result of resiliencyResiliencyResponse
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyRequest'
+      tags:
+        - ResiliencyService
+  /resiliency.ResiliencyService/UnaryResiliency:
+    post:
+      operationId: ResiliencyService_UnaryResiliency
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyRequest'
+      tags:
+        - ResiliencyService
 definitions:
   bankCurrentBalanceRequest:
     type: object
@@ -322,6 +417,25 @@ definitions:
       '@type':
         type: string
     additionalProperties: {}
+  resiliencyResiliencyRequest:
+    type: object
+    properties:
+      min_delay_second:
+        type: integer
+        format: int32
+      max_delay_second:
+        type: integer
+        format: int32
+      status_codes:
+        type: array
+        items:
+          type: integer
+          format: int64
+  resiliencyResiliencyResponse:
+    type: object
+    properties:
+      dummy_string:
+        type: string
   rpcStatus:
     type: object
     properties:
